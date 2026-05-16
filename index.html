@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeekUp — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #17171f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #6be4b0;
+    --accent2: #b588f7;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --faint: rgba(255,255,255,0.035);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.45;
+  }
+
+  /* ── AMBIENT GLOW ── */
+  .glow-top {
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(107,228,176,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-right {
+    position: fixed;
+    top: 40%;
+    right: -250px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(181,136,247,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    padding: 48px 32px;
+    overflow-y: auto;
+    background: rgba(10,10,15,0.6);
+    backdrop-filter: blur(12px);
+  }
+
+  .sidebar-brand {
+    margin-bottom: 40px;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .brand-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-list a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.2s;
+    line-height: 1.3;
+  }
+
+  .nav-list a:hover {
+    color: var(--text);
+    background: var(--faint);
+  }
+
+  .nav-list a.active {
+    color: var(--accent);
+    background: rgba(107,228,176,0.06);
+  }
+
+  .nav-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    min-width: 16px;
+    opacity: 0.6;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .updated-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .updated-badge span {
+    color: var(--accent);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 780px;
+    padding: 80px 60px 120px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 80px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 48px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: #fff;
+    margin-bottom: 32px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 28px 32px;
+    font-size: 15px;
+    color: rgba(232,232,240,0.8);
+    line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-box::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: var(--accent);
+    opacity: 0.07;
+    line-height: 1;
+  }
+
+  .summary-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--faint);
+  }
+
+  .pill.green { border-color: rgba(107,228,176,0.3); color: var(--accent); background: rgba(107,228,176,0.05); }
+  .pill.purple { border-color: rgba(181,136,247,0.3); color: var(--accent2); background: rgba(181,136,247,0.05); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 72px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  .section:nth-child(5) { animation-delay: 0.3s; }
+  .section:nth-child(6) { animation-delay: 0.35s; }
+  .section:nth-child(7) { animation-delay: 0.4s; }
+  .section:nth-child(8) { animation-delay: 0.45s; }
+  .section:nth-child(9) { animation-delay: 0.5s; }
+  .section:nth-child(10) { animation-delay: 0.55s; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 24px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .subsection-title {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin: 36px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .subsection-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  p {
+    color: rgba(232,232,240,0.75);
+    font-size: 15px;
+    margin-bottom: 16px;
+    line-height: 1.85;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(107,228,176,0.3);
+    transition: border-color 0.2s;
+  }
+
+  a:hover { border-color: var(--accent); }
+
+  strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0 28px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 14px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody tr:hover { background: var(--faint); }
+
+  td {
+    padding: 14px 20px;
+    color: rgba(232,232,240,0.7);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  td strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  td:first-child { color: var(--text); }
+
+  /* ── CALLOUT BLOCKS ── */
+  .callout {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    font-size: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    line-height: 1.7;
+  }
+
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .callout.important {
+    background: rgba(107,228,176,0.05);
+    border: 1px solid rgba(107,228,176,0.2);
+    color: rgba(232,232,240,0.8);
+  }
+
+  .callout.warning {
+    background: rgba(255,190,80,0.05);
+    border: 1px solid rgba(255,190,80,0.2);
+    color: rgba(232,232,240,0.8);
+  }
+
+  .callout.info {
+    background: rgba(181,136,247,0.05);
+    border: 1px solid rgba(181,136,247,0.2);
+    color: rgba(232,232,240,0.8);
+  }
+
+  /* ── PERMISSION CARDS ── */
+  .permission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .perm-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .perm-card:hover {
+    border-color: rgba(107,228,176,0.2);
+    background: var(--surface2);
+  }
+
+  .perm-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .perm-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .perm-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .perm-required {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(107,228,176,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(107,228,176,0.2);
+  }
+
+  .perm-optional {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(107,107,128,0.08);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ── RIGHTS LIST ── */
+  .rights-grid {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .right-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: rgba(232,232,240,0.75);
+    transition: border-color 0.2s;
+  }
+
+  .right-item:hover { border-color: rgba(181,136,247,0.3); }
+
+  .right-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* ── CONTACT BLOCK ── */
+  .contact-block {
+    background: linear-gradient(135deg, rgba(107,228,176,0.07), rgba(181,136,247,0.07));
+    border: 1px solid rgba(107,228,176,0.15);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  .contact-block .section-title {
+    margin-bottom: 12px;
+  }
+
+  .contact-block p {
+    max-width: 400px;
+    margin: 0 auto 28px;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #000 !important;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    border: none !important;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .contact-email:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 1000;
+    transition: width 0.1s;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+    .nav-list { flex-direction: row; flex-wrap: wrap; }
+    .nav-list a { padding: 6px 10px; font-size: 12px; }
+    .main { padding: 48px 24px 80px; }
+    .permission-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div class="glow-top"></div>
+<div class="glow-right"></div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">
+        <div class="brand-icon">🔥</div>
+        <span class="brand-name">WeekUp</span>
+      </div>
+      <div class="brand-tag">Privacy Policy</div>
+    </div>
+
+    <div class="nav-label">Contents</div>
+    <ul class="nav-list" id="nav">
+      <li><a href="#s1"><span class="nav-num">01</span> Who We Are</a></li>
+      <li><a href="#s2"><span class="nav-num">02</span> Scope</a></li>
+      <li><a href="#s3"><span class="nav-num">03</span> What We Collect</a></li>
+      <li><a href="#s4"><span class="nav-num">04</span> How We Use It</a></li>
+      <li><a href="#s5"><span class="nav-num">05</span> What Others See</a></li>
+      <li><a href="#s6"><span class="nav-num">06</span> Device Permissions</a></li>
+      <li><a href="#s7"><span class="nav-num">07</span> How We Share</a></li>
+      <li><a href="#s8"><span class="nav-num">08</span> Data Retention</a></li>
+      <li><a href="#s9"><span class="nav-num">09</span> Security</a></li>
+      <li><a href="#s10"><span class="nav-num">10</span> Your Rights</a></li>
+      <li><a href="#s11"><span class="nav-num">11</span> Children</a></li>
+      <li><a href="#s12"><span class="nav-num">12</span> Transfers</a></li>
+      <li><a href="#s13"><span class="nav-num">13</span> Changes</a></li>
+      <li><a href="#s14"><span class="nav-num">14</span> Contact</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="updated-badge">
+        Effective<br><span>May 16, 2026</span><br>
+        Last updated<br><span>May 16, 2026</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">Privacy Policy</div>
+      <h1 class="hero-title">Your data,<br><em>your rules.</em></h1>
+      <div class="summary-box">
+        WeekUp is a habit-accountability app. You sign in with your phone number, commit to short habit sprints, and post <strong>photo proof</strong> each day. Much of what you do is <strong>visible to other users</strong> by design. We do <strong>not</strong> sell your personal data or run third-party advertising analytics.
+        <div class="summary-pills">
+          <span class="pill green">✓ No data sales</span>
+          <span class="pill green">✓ No ad tracking</span>
+          <span class="pill purple">Supabase storage</span>
+          <span class="pill purple">Razorpay payments</span>
+          <span class="pill">SMS OTP login</span>
+          <span class="pill">Expo push</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- § 1 -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Who We Are</h2>
+      </div>
+      <p><strong>WeekUp</strong> is the mobile application published on the Apple App Store and Google Play (<code>com.WeekUp</code>). The data controller for personal information processed through the app is:</p>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><td><strong>Legal name</strong></td><td><em>[Your legal entity name]</em></td></tr>
+            <tr><td><strong>Contact email</strong></td><td><a href="mailto:privacy@weekup.app">privacy@weekup.app</a></td></tr>
+            <tr><td><strong>Website</strong></td><td><a href="https://weekup.app" target="_blank">weekup.app</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- § 2 -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Scope</h2>
+      </div>
+      <p>This Privacy Policy covers how we collect, use, store, and share information when you install or use the WeekUp mobile app (iOS or Android), create an account, use habit sprints, check in with photos, interact with social features, subscribe to <strong>WeekUp Pro</strong>, or contact us about privacy.</p>
+      <div class="callout info">
+        <span class="callout-icon">ℹ️</span>
+        <span>It does <strong>not</strong> cover third-party websites or services you reach through links inside the app — Razorpay's checkout pages, or your SMS app when inviting a friend. Those services have their own policies.</span>
+      </div>
+    </section>
+
+    <!-- § 3 -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Information We Collect</h2>
+      </div>
+
+      <div class="subsection-title">Account & Identity</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Source</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Phone number</strong></td><td>You, at sign-up</td><td>OTP auth; account recovery; friend matching</td></tr>
+            <tr><td><strong>User ID (UUID)</strong></td><td>Auth provider</td><td>Ties profile, habits, and check-ins to your account</td></tr>
+            <tr><td><strong>Username</strong></td><td>Chosen at onboarding</td><td>Public identifier (@username)</td></tr>
+            <tr><td><strong>Session tokens</strong></td><td>Auth provider</td><td>Keeps you signed in; stored locally on device</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection-title">Habits, Check-ins & Streaks</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Habit title & description</strong></td><td>Shown on profile and social surfaces</td></tr>
+            <tr><td><strong>Sprint dates & visibility</strong></td><td>Drives streak logic; determines who sees activity</td></tr>
+            <tr><td><strong>Daily check-in</strong></td><td>One per habit per calendar day (IST)</td></tr>
+            <tr><td><strong>Proof photo</strong></td><td><strong>Required</strong> for normal check-in; uploaded to cloud storage</td></tr>
+            <tr><td><strong>Streak counts</strong></td><td>Feed badges and leaderboards</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout important">
+        <span class="callout-icon">🔒</span>
+        <span><strong>Check-ins are permanent by design.</strong> The app does not let you edit or delete a submitted check-in. This is intentional for accountability.</span>
+      </div>
+
+      <div class="subsection-title">Contacts (Optional)</div>
+      <p>If you grant Contacts permission, the app reads phone numbers on your device, normalizes them, and sends batches of up to <strong>200 numbers</strong> to find which contacts already use WeekUp. We do <strong>not</strong> upload or permanently store your full address book.</p>
+
+      <div class="subsection-title">Payments (WeekUp Pro)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Processor</th></tr></thead>
+          <tbody>
+            <tr><td>Subscription plan, status, billing period</td><td><strong>Razorpay</strong> + our database</td></tr>
+            <tr><td>Razorpay customer / subscription IDs</td><td>Our database (never full card numbers)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- § 4 -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">How We Use Your Information</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Purpose</th><th>Legal basis</th></tr></thead>
+          <tbody>
+            <tr><td>Create and secure your account (OTP login)</td><td>Contract; legitimate interest (security)</td></tr>
+            <tr><td>Operate habit sprints, streaks, and check-ins</td><td>Contract</td></tr>
+            <tr><td>Show social features (feed, leaderboard, profiles)</td><td>Contract; your choices</td></tr>
+            <tr><td>Send push reminders and streak notifications</td><td>Consent (disable in system settings)</td></tr>
+            <tr><td>Match contacts already on WeekUp</td><td>Consent (Contacts permission)</td></tr>
+            <tr><td>Process Pro subscriptions</td><td>Contract</td></tr>
+            <tr><td>Prevent abuse (rate limits, blocks, moderation)</td><td>Legitimate interest</td></tr>
+            <tr><td>Comply with law and valid legal requests</td><td>Legal obligation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout important">
+        <span class="callout-icon">🚫</span>
+        <span>We do <strong>not</strong> use your data for third-party advertising or sell personal information.</span>
+      </div>
+    </section>
+
+    <!-- § 5 -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">What Other People Can See</h2>
+      </div>
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <span>WeekUp is built around <strong>social accountability</strong>. Please read this section carefully.</span>
+      </div>
+      <p>Depending on your settings, other authenticated users may see your <strong>username</strong>, <strong>avatar</strong>, <strong>bio</strong>, public habits and their titles, check-ins on public habits (including proof photos and captions), your streak counts on leaderboards, and claps and activity timestamps.</p>
+
+      <div class="subsection-title">Proof Photo Access</div>
+      <p>Proof photos live in a <strong>private storage bucket</strong>. Access is enforced server-side: you can always see your own proofs; others may receive short-lived signed URLs only when policy allows — for example, <em>today's</em> proof in IST for a public habit from someone you follow.</p>
+
+      <div class="subsection-title">What We Never Expose</div>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><td>Your <strong>phone number</strong></td><td>Other users see username only</td></tr>
+            <tr><td>Your <strong>push notification token</strong></td><td>Not visible to any user</td></tr>
+            <tr><td>Your <strong>payment card / bank details</strong></td><td>Processed by Razorpay; never seen by us</td></tr>
+            <tr><td><strong>Private habits</strong> and check-ins</td><td>Visible to you only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- § 6 -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">Device Permissions</h2>
+      </div>
+      <div class="permission-grid">
+        <div class="perm-card">
+          <div class="perm-icon">📷</div>
+          <div class="perm-name">Camera</div>
+          <div class="perm-desc">Capture today's proof photo for your habit check-in.</div>
+          <span class="perm-required">For check-in</span>
+        </div>
+        <div class="perm-card">
+          <div class="perm-icon">🖼️</div>
+          <div class="perm-name">Photos / Media</div>
+          <div class="perm-desc">Pick an existing image as proof from your library.</div>
+          <span class="perm-optional">Optional</span>
+        </div>
+        <div class="perm-card">
+          <div class="perm-icon">🔔</div>
+          <div class="perm-name">Notifications</div>
+          <div class="perm-desc">Streak reminders, nudges, and streak-broken alerts.</div>
+          <span class="perm-optional">Recommended</span>
+        </div>
+        <div class="perm-card">
+          <div class="perm-icon">👥</div>
+          <div class="perm-name">Contacts</div>
+          <div class="perm-desc">Find friends already on WeekUp and invite others.</div>
+          <span class="perm-optional">Optional</span>
+        </div>
+      </div>
+      <p>You can change or revoke permissions in your device <strong>Settings</strong> at any time. Some features will stop working if you revoke them.</p>
+    </section>
+
+    <!-- § 7 -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="section-title">How We Share Information</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Provider</th><th>Role</th><th>Data involved</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Supabase</strong></td><td>Database, auth, storage, edge functions</td><td>Most app data</td></tr>
+            <tr><td><strong>Expo / EAS</strong></td><td>Push notification delivery</td><td>Push tokens, notification payloads</td></tr>
+            <tr><td><strong>SMS provider</strong></td><td>OTP delivery (via Supabase Auth)</td><td>Phone number</td></tr>
+            <tr><td><strong>Razorpay</strong></td><td>Subscriptions & payments (India)</td><td>Billing identifiers, subscription status</td></tr>
+            <tr><td><strong>OpenAI</strong></td><td>Text moderation API</td><td>Habit titles / captions (snippets only)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>We may also disclose information to comply with law, protect the rights of WeekUp or its users, investigate abuse or fraud, or in the event of a business transfer.</p>
+    </section>
+
+    <!-- § 8 -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="section-title">Data Retention</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Category</th><th>Retention</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Account data</strong></td><td>Until account deletion</td></tr>
+            <tr><td><strong>Check-ins & proof photos</strong></td><td>While account exists; not user-deletable by design</td></tr>
+            <tr><td><strong>Push token</strong></td><td>Updated while active; removed on deletion</td></tr>
+            <tr><td><strong>OTP rate-limit logs</strong></td><td>Limited period for abuse prevention</td></tr>
+            <tr><td><strong>Payment records</strong></td><td>As required for tax, accounting, fraud prevention</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="subsection-title">Account Deletion</div>
+      <p>Delete your account via <strong>Me → Manage account → Delete account</strong>. This calls our <code>delete_my_account</code> function and cascades deletes across your profile, habits, check-ins, follows, and tokens.</p>
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <span>Storage files (proof photos, avatars) may take additional time to purge from backups or CDN caches. Razorpay may retain payment records under their own policy.</span>
+      </div>
+    </section>
+
+    <!-- § 9 -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2 class="section-title">Security</h2>
+      </div>
+      <div class="rights-grid">
+        <div class="right-item"><div class="right-dot"></div><span><strong>HTTPS</strong> for all API and storage access</span></div>
+        <div class="right-item"><div class="right-dot"></div><span><strong>Row Level Security (RLS)</strong> so clients only access permitted rows</span></div>
+        <div class="right-item"><div class="right-dot"></div><span><strong>Private proof storage</strong> with signed, time-limited URLs</span></div>
+        <div class="right-item"><div class="right-dot"></div><span><strong>Owner-only</strong> access to push tokens and subscription rows</span></div>
+        <div class="right-item"><div class="right-dot"></div><span><strong>OTP rate limiting</strong> to reduce abuse</span></div>
+      </div>
+      <p>No system is 100% secure. You are responsible for keeping your phone and SMS messages secure. If you believe your account was compromised, contact <a href="mailto:privacy@weekup.app">privacy@weekup.app</a>.</p>
+    </section>
+
+    <!-- § 10 -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2 class="section-title">Your Choices & Rights</h2>
+      </div>
+      <p>Depending on where you live (India's DPDP Act, EU/UK GDPR, U.S. state laws), you may have the right to:</p>
+      <div class="rights-grid">
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Access</strong> a copy of your data (in-app export)</span></div>
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Correct</strong> inaccurate profile information (in-app edit)</span></div>
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Delete</strong> your account (in-app deletion)</span></div>
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Withdraw consent</strong> for optional processing (notifications, Contacts)</span></div>
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Object or restrict</strong> certain processing where law provides</span></div>
+        <div class="right-item"><div class="right-dot" style="background:var(--accent)"></div><span><strong>Lodge a complaint</strong> with your local data protection authority</span></div>
+      </div>
+    </section>
+
+    <!-- § 11 -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2 class="section-title">Children</h2>
+      </div>
+      <div class="callout important">
+        <span class="callout-icon">🧒</span>
+        <span>WeekUp is <strong>not directed at children under 13</strong>, and we do not knowingly collect personal information from anyone under 13. If you believe a child under 13 has provided us data, contact us and we will delete it promptly.</span>
+      </div>
+    </section>
+
+    <!-- § 12 -->
+    <section class="section" id="s12">
+      <div class="section-header">
+        <span class="section-num">12</span>
+        <h2 class="section-title">International Transfers</h2>
+      </div>
+      <p>Our infrastructure providers (notably Supabase) may process and store data in countries other than your own, including the <strong>United States</strong> and the <strong>European Union</strong>, depending on project configuration. Where required, we rely on appropriate safeguards such as standard contractual clauses or equivalent mechanisms.</p>
+    </section>
+
+    <!-- § 13 -->
+    <section class="section" id="s13">
+      <div class="section-header">
+        <span class="section-num">13</span>
+        <h2 class="section-title">Changes to This Policy</h2>
+      </div>
+      <p>We may update this Privacy Policy from time to time. When we do, we will change the <strong>"Last updated"</strong> date at the top. For material changes, we may notify you in the app or by other reasonable means.</p>
+      <p>Continued use of WeekUp after the effective date of an update means you accept the revised policy, to the extent permitted by law.</p>
+    </section>
+
+    <!-- § 14 CONTACT -->
+    <section class="section" id="s14">
+      <div class="contact-block">
+        <div class="section-header" style="justify-content:center; border:none; margin-bottom:16px;">
+          <h2 class="section-title">Get in Touch</h2>
+        </div>
+        <p>Questions, requests, or complaints about privacy? We're here to help. Include your phone number or username so we can assist you efficiently.</p>
+        <a href="mailto:privacy@weekup.app?subject=Privacy%20request%20—%20WeekUp" class="contact-email">
+          ✉️ privacy@weekup.app
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.body.scrollHeight - window.innerHeight;
+    progress.style.width = (scrolled / max * 100) + '%';
+  });
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('#nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`#nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
